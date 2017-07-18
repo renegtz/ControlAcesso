@@ -28,28 +28,74 @@ public class inventario {
         String sql = "select *from inventario";
         try {
             st = con.createStatement();
-            rs = st.executeQuery(sql);
-            
-            
+            rs = st.executeQuery(sql);  
+            con.close();
+            rs.close();
+            st.close();
         } catch (Exception e) {
-        }
-  
-        
+            System.out.println("Error al consultar datos");
+        }  
     }
     
-    public void insertar(String nombre, String cantidad, String precio){
+    public void insertar(String nombre, int cantidad, double precio){
         conexion = new Conexion();
         Connection con = conexion.getConnection();
         Statement st;
        // System.out.println("inserte nombre");
-        String sql = "insert into inventario (nombre, cantidad, precio) values ('"+nombre+"','"+cantidad+"','"+precio+"')";
-  
+        String sql = "insert into inventario (nombre, cantidad, precio) values ('"+nombre+"','"+cantidad+"','"+precio+"')"; 
+        try {
+            st= con.createStatement();
+            st.executeUpdate(sql);
+            con.close();
+            st.close();
+        } catch (Exception e) {
+        }
+    }   
+    
+    public void eliminar(int id){
+        conexion = new Conexion();
+        Connection con = conexion.getConnection();
+        Statement st;
+       // System.out.println("inserte nombre");
+        String sql = "delete from inventario where idProducto="+id; 
+        try {
+            st = con.createStatement();
+            int confirmar = st.executeUpdate(sql);
+            if(confirmar ==1){
+                System.out.println("Registro eliminado");
+            } else{
+                System.out.println("Error al eliminar");
+            }
+            st.close();
+            con.close();
+                    
+        } catch (Exception e) {
+            System.out.println("Error "+ e);
+        }
+   
         
     }
-    
-    public void eliminar(){
-    }
-    public void modificar(){
+    public void modificar( int id, String nombre, int cantidad, double precio){
+        conexion = new Conexion();
+        Connection con = conexion.getConnection();
+        Statement st;
+       // System.out.println("inserte nombre");
+        String sql = "update inventario set nombre='"+nombre+"','"+cantidad+"','"+precio+"' where idProducto ="+id+""; 
+        try {
+            st = con.createStatement();
+            int confirmar = st.executeUpdate(sql);
+            if(confirmar ==1){
+                System.out.println("Producto Modificado");
+            } else{
+                System.out.println("Error al modificar producto");
+            }
+            st.close();
+            con.close();
+                    
+        } catch (Exception e) {
+            System.out.println("Error "+ e);
+        }
+        
     }
     
     public static void main(String[] args) {
