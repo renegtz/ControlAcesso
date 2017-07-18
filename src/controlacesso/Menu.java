@@ -17,6 +17,9 @@ public class Menu extends javax.swing.JFrame {
     static Menu menu;
     static CrearCuenta crearcuenta;
     static IniciarSesion iniciarsesion;
+    static InventarioFrame inventariousuario;
+    static Logs logs;
+    static PanelUsuario panelusuario;
 
     public Menu() {
         initComponents();
@@ -101,6 +104,9 @@ public class Menu extends javax.swing.JFrame {
         menu = new Menu();
         crearcuenta = new CrearCuenta();
         iniciarsesion = new IniciarSesion();
+        inventariousuario = new InventarioFrame();
+        logs = new Logs();
+        panelusuario = new PanelUsuario();
         menu.setVisible(true);
     }
 
