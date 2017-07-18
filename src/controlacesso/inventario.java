@@ -79,7 +79,7 @@ public class inventario {
         Connection con = conexion.getConnection();
         Statement st;
        // System.out.println("inserte nombre");
-        String sql = "update inventario set nombre='"+nombre+"','"+cantidad+"','"+precio+"' where idProducto ="+id+""; 
+        String sql = "update inventario set nombre='"+nombre+"',cantidad='"+cantidad+"',precio='"+precio+"' where idProducto ="+id+""; 
         try {
             st = con.createStatement();
             int confirmar = st.executeUpdate(sql);

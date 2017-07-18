@@ -39,11 +39,11 @@ public class gestionUsuarios {
         
     }
     
-    public void registar(String user, String password){
+    public void registar(String user, String password, int tipo){
         conexion = new Conexion();
         Connection con = conexion.getConnection();
         Statement st;
-        String sql = "insert into users (name, password) values ('"+user+"','"+password+"')"; 
+        String sql = "insert into users (name, password,tipoUsuario) values ('"+user+"','"+password+"','"+tipo+"')"; 
         try {
             st= con.createStatement();
             st.executeUpdate(sql);
@@ -53,12 +53,12 @@ public class gestionUsuarios {
         }       
     }
     
-    public void modificar(int id, String user, String password){
+    public void modificar(int id, String user, String password, int tipo){
         conexion = new Conexion();
         Connection con = conexion.getConnection();
         Statement st;
        // System.out.println("inserte nombre");
-        String sql = "update users set name='"+user+"','"+password+"' where iduser ="+id+""; 
+        String sql = "update users set name='"+user+"',password='"+password+"', tipoUsuario'"+tipo+"' where iduser ="+id+""; 
         try {
             st = con.createStatement();
             int confirmar = st.executeUpdate(sql);
