@@ -7,6 +7,14 @@ package controlacesso;
 
 import static controlacesso.Menu.iniciarsesion;
 import static controlacesso.Menu.menu;
+import static controlacesso.Menu.panelusuario;
+import static controlacesso.gestionUsuarios.usurioContra;
+import static controlacesso.gestionUsuarios.usurioNombre;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -54,6 +62,11 @@ public class IniciarSesion extends javax.swing.JFrame {
         });
 
         jButton1.setText("INICIAR SESION");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("REGRESAR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -117,12 +130,31 @@ public class IniciarSesion extends javax.swing.JFrame {
         iniciarsesion.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        gestionUsuarios usuarios = new gestionUsuarios();
+        try {
+            usuarios.consultar();
+
+            for (int i = 0; i < usurioNombre.size(); i++) {
+                System.out.println(usurioNombre.get(i));
+
+                if (jPasswordField1.getText().equals(Utilidades.Desencriptar((String) usurioContra.get(i))) && usurioNombre.get(i).equals(jTextField1.getText())) {
+                    panelusuario.setVisible(true);
+                    iniciarsesion.setVisible(false);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Usuario no registrado");
+                }
+
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(IniciarSesion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

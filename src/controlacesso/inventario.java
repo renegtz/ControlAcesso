@@ -43,11 +43,14 @@ public class inventario {
        // System.out.println("inserte nombre");
         String sql = "insert into inventario (nombre, cantidad, precio) values ('"+nombre+"','"+cantidad+"','"+precio+"')"; 
         try {
+                        System.out.println("funciono ('"+nombre+"','"+cantidad+"','"+precio+"')");
+
             st= con.createStatement();
             st.executeUpdate(sql);
             con.close();
             st.close();
         } catch (Exception e) {
+            System.out.println("error "+e);
         }
     }   
     

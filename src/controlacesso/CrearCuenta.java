@@ -7,6 +7,7 @@ package controlacesso;
 
 import static controlacesso.Menu.crearcuenta;
 import static controlacesso.Menu.menu;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -52,6 +53,11 @@ public class CrearCuenta extends javax.swing.JFrame {
         jLabel4.setText("Repita la contraseña");
 
         jButton1.setText("GUARDAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("REGRESAR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -117,11 +123,29 @@ public class CrearCuenta extends javax.swing.JFrame {
         crearcuenta.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        crearcuenta();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
+    public void crearcuenta() {
+        gestionUsuarios usuario = new gestionUsuarios();
+        if (jTextField1.getText().equals("") || jPasswordField1.getText().equals("") || jPasswordField2.getText().equals("") || !jPasswordField1.getText().equals(jPasswordField2.getText())) {
+            if (!jPasswordField1.getText().equals(jPasswordField2.getText())) {
+                JOptionPane.showMessageDialog(null, "Tiene que ser la misma contraseña");
+            }
+            System.out.println(" fallo");
+        } else {
+            usuario.registar(jTextField1.getText(), Utilidades.Encriptar(jPasswordField1.getText()), 3);
+            JOptionPane.showMessageDialog(null, "REGISTRADO");
+
+        }
+    }
+
     public static void main(String args[]) {
-     
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
